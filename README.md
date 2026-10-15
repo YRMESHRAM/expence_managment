@@ -1,38 +1,78 @@
 # 💳 FinTrack — Full-Stack Expense Intelligence & Management
 
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Render-brightgreen?style=for-the-badge&logo=render)](https://fintrack-expense-management.onrender.com/login)
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue?style=for-the-badge&logo=react)](https://react.dev)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-Build%20Tool-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-green?style=for-the-badge&logo=node.js)](https://nodejs.org)
 [![Express](https://img.shields.io/badge/Express.js-Backend-black?style=for-the-badge&logo=express)](https://expressjs.com)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen?style=for-the-badge&logo=mongodb)](https://www.mongodb.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
 
-**FinTrack** is a full-stack, secure, responsive personal finance and expense management web application. Built with **React 19 (Vite)**, **Node.js/Express**, and **MongoDB**, it provides budget tracking, analytics, and data isolation.
+---
+
+## 🌐 Live Application
+
+> **Production Deployment:**  
+> 🔗 **[https://fintrack-expense-management.onrender.com/login](https://fintrack-expense-management.onrender.com/login)**
+
+### ⚡ Quick Demo Access
+
+You can test the app without signing up:
+
+- Click the **"Instant Demo Account"** button on the login screen, or
+- Sign in with demo credentials:
+  - **Email**: `demo@fintrack.app`
+  - **Password**: `demo1234`
+
+_(Note: Render free tier services spin down on inactivity; if the site is cold, please allow 30–45 seconds for initial server spin-up)._
 
 ---
 
-## ✨ Features
+## 📖 Overview
 
-- 🔐 **Secure JWT Authentication**: Register, login, token refresh, pre-save password hashing with `bcryptjs` (10 rounds).
-- 🛡️ **User Data Isolation**: User queries and mutations strictly scoped to `req.user.id`.
+**FinTrack** is a modern, responsive personal finance and expense management platform built on the **MERN** stack (React 19, Vite, Express, Node.js, and MongoDB). Designed with a glassmorphic aesthetic, it combines spending tracking, dynamic budget allocation, analytical visualizations, and multi-user data isolation.
+
+---
+
+## ✨ Key Features
+
+- 🔐 **Secure JWT Authentication & Authorization**:
+  - User registration, login, and profile management.
+  - Safe password hashing with `bcryptjs` (10 salt rounds).
+  - Axios interceptors with automatic bearer token injection and session expiration handling.
+- 🛡️ **Strict Data Isolation**:
+  - Every expense, budget target, and custom category is strictly scoped to `req.user.id`.
 - 💰 **Comprehensive Expense Tracking**:
   - Full CRUD operations with instant UI updates.
-  - Multi-condition filters (Category, Payment Method, Date Ranges: Today, This Week, This Month, This Quarter, This Year, Custom).
-  - Fuzzy text search across titles, descriptions, and categories.
-  - One-click CSV Export with formatted metadata.
-- 🎯 **Visual Budget Tracker**:
-  - Dynamic monthly budget targets with percentage utilization gauge.
-  - Visual status badges: Safe (`<80%`), Warning (`≥80%`), and Exceeded (`≥100%`).
-  - Daily spending advisor based on remaining days in the month.
-- 📊 **Analytics & Visual Reports**:
-  - Category breakdown Doughnut chart with Chart.js.
-  - Interactive KPI cards for Total Spend, Current Month, Highest Expense, and Average Transaction.
-- 🏷️ **Category Management**:
-  - Pre-seeded default categories (*Food, Travel, Shopping, Bills, Healthcare, Groceries, Rent, Education, Other*).
-  - Custom category creator with color and icon support.
-- 🌓 **Themes & Responsive UX**:
-  - Glassmorphic dark and light theme toggle with local storage persistence.
-  - Fully responsive mobile drawer and desktop sidebar.
-  - Currency localized to Indian Rupee (₹ INR) format.
+  - Multi-condition filters: Category, Payment Method (Cash, UPI, Credit Card, Debit Card, Net Banking), and Date Ranges (_Today, This Week, This Month, This Quarter, This Year, Custom_).
+  - Real-time search across titles, descriptions, and categories.
+  - One-click CSV Export with formatted dates, amounts, and categories.
+- 🎯 **Visual Budget Intelligence**:
+  - Dynamic monthly budget target configuration.
+  - Visual status progress gauge with color indicators: **Safe** (`<80%`), **Warning** (`≥80%`), and **Exceeded** (`≥100%`).
+  - Intelligent daily spending advisor based on days remaining in the billing period.
+- 📊 **Visual Analytics & KPI Insights**:
+  - Category breakdown Doughnut charts powered by **Chart.js**.
+  - At-a-glance KPI cards: Total Spent, Current Month Spending, Highest Expense, and Average Transaction Amount.
+- 🏷️ **Custom Category Management**:
+  - Pre-seeded essential categories (_Food, Travel, Shopping, Bills, Healthcare, Groceries, Rent, Education, Other_).
+  - Ability to create custom categories with custom icons and color pickers.
+- 🌓 **Glassmorphic UI & Responsive UX**:
+  - Theme toggle (Dark / Light) with local storage persistence.
+  - Indian Rupee (`₹` INR) currency localization.
+  - Mobile drawer navigation and responsive desktop layout.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer               | Technologies                                                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**        | React 19, Vite, React Router v7, Axios, Chart.js, React-ChartJS-2, Lucide Icons, Vanilla CSS (Design Tokens & Glassmorphism) |
+| **Backend**         | Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), BcryptJS, Helmet, CORS, Dotenv                                         |
+| **Database**        | MongoDB (MongoDB Atlas in Production, In-Memory fallback for local testing)                                                  |
+| **Hosting & CI/CD** | Render (Web Service: Unified Static Build + API Server)                                                                      |
 
 ---
 
@@ -50,21 +90,21 @@ expence_managment/
 │   ├── package.json        # Backend dependencies
 │   └── server.js           # Server entry point & static asset serving
 ├── frontend/
-│   ├── public/             # Static public assets
+│   ├── public/             # Static public assets & favicon
 │   ├── src/
 │   │   ├── components/     # UI components (Layout, Navbar, Sidebar, Modals, KPICards)
 │   │   ├── context/        # React Context (AuthContext, ThemeContext, ToastContext)
 │   │   ├── pages/          # Dashboard, Expenses, Budget, Reports, Categories, Profile, Auth
 │   │   ├── services/       # Axios API client with auto-auth interceptors
-│   │   ├── App.jsx         # Routes & provider hierarchy
-│   │   ├── index.css       # Global design system, glassmorphism, responsive utilities
-│   │   └── main.jsx        # App entry point
-│   ├── index.html          # SEO-ready HTML with fonts
-│   ├── vite.config.js      # Vite config with API proxy
+│   │   ├── App.jsx         # App router & context providers
+│   │   ├── index.css       # Global design system & glassmorphism variables
+│   │   └── main.jsx        # Frontend entry point
+│   ├── index.html          # HTML entry with custom typography
+│   ├── vite.config.js      # Vite build configuration
 │   └── package.json        # Frontend dependencies
-├── .gitignore              # Git ignore rules
+├── .gitignore              # Git ignore configuration
 ├── LICENSE                 # MIT License
-├── package.json            # Root scripts runner
+├── package.json            # Root unified build & start script
 └── README.md               # Project documentation
 ```
 
@@ -73,117 +113,164 @@ expence_managment/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** (v18 or higher)
-- **npm** (v9 or higher)
-- **MongoDB** (Local instance or MongoDB Atlas URI; automated in-memory MongoDB is built-in as a fallback)
+
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
+- **MongoDB**: Local MongoDB instance or free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster
+
+---
 
 ### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/your-username/fintrack.git
-cd fintrack
+git clone https://github.com/YRMESHRAM/expence_managment.git
+cd expence_managment
 ```
 
 ### 2. Install Dependencies
+
+Install all workspace dependencies (root, backend, and frontend) in one command:
+
 ```bash
-# Install root, backend, and frontend dependencies
 npm run install:all
 ```
-*(Or run `npm install` inside both `backend/` and `frontend/` folders).*
 
-### 3. Configure Environment Variables
-Copy `.env.example` to `.env` in the `backend/` folder:
+---
+
+### 3. Environment Variables
+
+Create a `.env` file in the `backend/` directory by copying `.env.example`:
+
 ```bash
 cp backend/.env.example backend/.env
 ```
-Ensure the variables in `backend/.env` are configured:
+
+Populate the following variables in `backend/.env`:
+
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/expense_management
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/expense_management?retryWrites=true&w=majority
 JWT_SECRET=your_super_secret_jwt_key_here
 JWT_EXPIRE=30d
 NODE_ENV=development
 ```
 
-### 4. Running the Application
+---
 
-#### Option A: Development Mode (Backend + Frontend with Hot Reload)
-In two separate terminals:
+### 4. Running Locally
+
+#### Development Mode (Independent Frontend & Backend)
+
+Run backend and frontend concurrently in two terminals:
+
 ```bash
-# Terminal 1: Start backend
+# Terminal 1: Start backend with hot reload (http://localhost:5000)
 npm run server
 
-# Terminal 2: Start frontend (Vite at http://localhost:5173)
+# Terminal 2: Start frontend Vite server (http://localhost:5173)
 npm run client
 ```
 
-#### Option B: Production Mode (Unified Server)
+#### Production Mode (Unified Server)
+
+Test the production build served entirely by the Express backend:
+
 ```bash
-# 1. Build the frontend production bundle
+# 1. Build backend dependencies and frontend distribution
 npm run build
 
-# 2. Start the Express server (serves frontend on http://localhost:5000)
+# 2. Launch production Express server
 npm start
 ```
+
+Visit `http://localhost:5000` in your browser.
+
+---
+
+## ☁️ Deployment on Render
+
+This project is configured for single-service deployment on **Render**:
+
+1. **Create Web Service**:
+   - Link repository: `https://github.com/YRMESHRAM/expence_managment`
+   - **Environment**: `Node`
+2. **Build & Start Commands**:
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm start`
+3. **Environment Variables on Render**:
+   - `NODE_ENV`: `production`
+   - `PORT`: `10000` _(or default provided by Render)_
+   - `MONGODB_URI`: `<Your MongoDB Atlas Connection String>`
+   - `JWT_SECRET`: `<Secure Random String>`
+   - `JWT_EXPIRE`: `30d`
 
 ---
 
 ## 📡 API Reference
 
-### Auth Routes (`/api/auth`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Register new user & seed categories | Public |
-| `POST` | `/api/auth/login` | Authenticate user & get JWT token | Public |
-| `GET` | `/api/auth/me` | Get current user profile | Private |
+### Authentication (`/api/auth`)
 
-### Expense Routes (`/api/expenses`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `GET` | `/api/expenses` | List expenses (search, filter, sort) | Private |
-| `POST` | `/api/expenses` | Add new expense | Private |
-| `GET` | `/api/expenses/:id` | Get expense by ID | Private |
-| `PUT` | `/api/expenses/:id` | Update expense record | Private |
-| `DELETE` | `/api/expenses/:id` | Delete expense record | Private |
+| Method | Endpoint             | Description                                 | Access  |
+| ------ | -------------------- | ------------------------------------------- | ------- |
+| `POST` | `/api/auth/register` | Register new user & seed default categories | Public  |
+| `POST` | `/api/auth/login`    | Authenticate user & return JWT token        | Public  |
+| `GET`  | `/api/auth/me`       | Fetch authenticated user data               | Private |
 
-### Budget Routes (`/api/budget`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `GET` | `/api/budget?month=X&year=Y` | Get monthly budget & spend progress | Private |
-| `POST` | `/api/budget` | Set or update monthly budget | Private |
+### Expenses (`/api/expenses`)
 
-### Report Routes (`/api/reports`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `GET` | `/api/reports/summary` | Get aggregated KPI cards metrics | Private |
-| `GET` | `/api/reports/category` | Get category spending distribution | Private |
+| Method   | Endpoint            | Description                                   | Access  |
+| -------- | ------------------- | --------------------------------------------- | ------- |
+| `GET`    | `/api/expenses`     | Query user expenses (search, category, range) | Private |
+| `POST`   | `/api/expenses`     | Create a new expense record                   | Private |
+| `GET`    | `/api/expenses/:id` | Fetch specific expense by ID                  | Private |
+| `PUT`    | `/api/expenses/:id` | Update expense record                         | Private |
+| `DELETE` | `/api/expenses/:id` | Delete expense record                         | Private |
 
-### Category Routes (`/api/categories`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `GET` | `/api/categories` | Get all user categories | Private |
-| `POST` | `/api/categories` | Create custom category | Private |
-| `PUT` | `/api/categories/:id` | Update custom category | Private |
-| `DELETE` | `/api/categories/:id` | Delete custom category | Private |
+### Budget (`/api/budget`)
 
-### Profile Routes (`/api/profile`)
-| Method | Endpoint | Description | Access |
-|---|---|---|---|
-| `GET` | `/api/profile` | Get user profile metadata | Private |
-| `PUT` | `/api/profile/update` | Update personal information | Private |
-| `PUT` | `/api/profile/change-password`| Change user account password | Private |
+| Method | Endpoint                     | Description                          | Access  |
+| ------ | ---------------------------- | ------------------------------------ | ------- |
+| `GET`  | `/api/budget?month=X&year=Y` | Get monthly budget target & progress | Private |
+| `POST` | `/api/budget`                | Set or update monthly budget target  | Private |
+
+### Reports & Analytics (`/api/reports`)
+
+| Method | Endpoint                | Description                        | Access  |
+| ------ | ----------------------- | ---------------------------------- | ------- |
+| `GET`  | `/api/reports/summary`  | Get aggregated KPI cards metrics   | Private |
+| `GET`  | `/api/reports/category` | Get spend distribution by category | Private |
+
+### Categories (`/api/categories`)
+
+| Method   | Endpoint              | Description                                | Access  |
+| -------- | --------------------- | ------------------------------------------ | ------- |
+| `GET`    | `/api/categories`     | Get all system & custom categories         | Private |
+| `POST`   | `/api/categories`     | Create custom category (name, color, icon) | Private |
+| `PUT`    | `/api/categories/:id` | Update custom category                     | Private |
+| `DELETE` | `/api/categories/:id` | Delete custom category                     | Private |
+
+### Profile (`/api/profile`)
+
+| Method | Endpoint                       | Description                    | Access  |
+| ------ | ------------------------------ | ------------------------------ | ------- |
+| `GET`  | `/api/profile`                 | Retrieve user profile metadata | Private |
+| `PUT`  | `/api/profile/update`          | Update name or account details | Private |
+| `PUT`  | `/api/profile/change-password` | Update account password        | Private |
+
+### Health Check (`/api/health`)
+
+| Method | Endpoint      | Description                           | Access |
+| ------ | ------------- | ------------------------------------- | ------ |
+| `GET`  | `/api/health` | Check API server status and timestamp | Public |
 
 ---
 
-## 🛡️ Security
+## 🛡️ Security Best Practices
 
-- Passwords hashed with `bcryptjs`.
-- Strict JWT middleware checks for every private route.
-- Ownership checks on all write/delete operations.
-- Security headers enforced via `helmet`.
-- CORS configured for frontend communication.
+- **Bcrypt Password Hashing**: Passwords stored as 10-round salted hashes.
+- **JWT Protection**: Protected routes guarded with Bearer token authentication.
+- **Data Encapsulation**: Strict user ownership verification on all operations.
+- **Helmet Middleware**: Configured Content Security Policy and HTTP security headers.
+- **CORS Protection**: Controlled cross-origin access between frontend and API.
 
 ---
-
-## 📄 License
-
-This project is licensed under the [MIT License](./LICENSE).
